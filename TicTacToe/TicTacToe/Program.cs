@@ -11,6 +11,7 @@ namespace TicTacToe
         private static char[,] board = new char[,] { { '1', '2', '3'}, { '4', '5', '6' }, { '7', '8', '9' } };
         static char chosenField;
         static bool isAWinner = false;
+        static bool isADraw = false;
 
         public static void Refresh()
         {
@@ -71,6 +72,21 @@ namespace TicTacToe
             }
         }
 
+        public static void CheckIfThereIsADraw()
+        {
+            int counter = 0;
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 0; j < 3; j++)
+                {
+                    if (board[i, j] == 'X' || board[i, j] == 'O')
+                        counter++;
+                }
+            }
+            if (counter == 9)
+                isADraw = true;
+        }
+
 
 
         static void Main(string[] args)
@@ -92,7 +108,7 @@ namespace TicTacToe
             }
 
             int counter = 0;
-            while (!isAWinner)
+            while (!isAWinner && !isADraw)
             {
                 
                 if(counter%2 == 0)
@@ -113,13 +129,13 @@ namespace TicTacToe
                     {
                         SetAFieldToX(chosenField);
                         CheckIfThereISAWinner();
+                        CheckIfThereIsADraw();
                         Console.Clear();
                         Refresh();
                     }
                         
                     else
                     { 
-                        
                         Console.Clear();
                         Refresh();
                         Console.WriteLine("An error occured. Please try again.");
@@ -128,7 +144,9 @@ namespace TicTacToe
 
                     if(isAWinner == true)
                         Console.WriteLine("Player X has won! Congratulations!");
-                    
+                    if(isADraw == true)
+                        Console.WriteLine("The game has finished with a draw.");
+
                 }
                 else
                 {
@@ -149,6 +167,7 @@ namespace TicTacToe
                     {
                         SetAFieldToO(chosenField);
                         CheckIfThereISAWinner();
+                        CheckIfThereIsADraw();
                         Console.Clear();
                         Refresh();
                     }
@@ -162,6 +181,8 @@ namespace TicTacToe
                     }
                     if (isAWinner == true)
                         Console.WriteLine("Player O has won! Congratulations!");
+                    if (isADraw == true)
+                        Console.WriteLine("The game has finished with a draw.");
                 }
 
                 counter++;
