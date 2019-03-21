@@ -29,10 +29,26 @@ namespace TicTacToe
                 Console.WriteLine("\n\t-----------------");
             }
         }
-
+        /*
         public static void ChooseAField()
         {
-            chosenField = char.Parse(Console.ReadLine());
+            try
+            {
+                chosenField = char.Parse(Console.ReadLine());
+            }
+            catch (System.FormatException)
+            {
+                Console.WriteLine("You can enter only 1 sign!");
+            }
+            Console.WriteLine("\n");
+        }
+        */
+
+        // better and more elegant way than above
+        public static void ChooseAField()
+        {
+            bool result;
+            result = char.TryParse(Console.ReadLine(), out chosenField);
             Console.WriteLine("\n");
         }
 
@@ -144,7 +160,7 @@ namespace TicTacToe
 
                     if(isAWinner == true)
                         Console.WriteLine("Player X has won! Congratulations!");
-                    if(isADraw == true)
+                    if(isADraw == true && isAWinner == false)
                         Console.WriteLine("The game has finished with a draw.");
 
                 }
@@ -181,7 +197,7 @@ namespace TicTacToe
                     }
                     if (isAWinner == true)
                         Console.WriteLine("Player O has won! Congratulations!");
-                    if (isADraw == true)
+                    if (isADraw == true && isAWinner == false)
                         Console.WriteLine("The game has finished with a draw.");
                 }
 
