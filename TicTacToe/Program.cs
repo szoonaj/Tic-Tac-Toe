@@ -12,6 +12,8 @@ namespace TicTacToe
         static char chosenField;
         static bool isAWinner = false;
         static bool isADraw = false;
+        static int counter = 0;
+
 
         public static void Refresh()
         {
@@ -77,6 +79,15 @@ namespace TicTacToe
             }
         }
 
+        public static void ResetTheGame()
+        {
+            Console.Clear();
+            board = new char [,] { { '1', '2', '3'}, { '4', '5', '6' }, { '7', '8', '9' } };
+            isAWinner = false;
+            isADraw = false;
+            counter = 0;
+        }
+
         public static void CheckIfThereISAWinner()
         {
             if(board[0,0] == board[0,1] && board[0,0] == board[0, 2] || board[1, 0] == board[1, 1] && board[1, 0] == board[1, 2] ||
@@ -107,7 +118,7 @@ namespace TicTacToe
 
         static void Main(string[] args)
         {
-
+            START:
             Console.WriteLine(" That's my first game in C# - Tic Tac Toe! Have fun! \n ---------------------------------------------------\n\n");
 
             for (int i = 0; i<3; i++)
@@ -123,7 +134,6 @@ namespace TicTacToe
                 Console.WriteLine("\n\t-----------------");
             }
 
-            int counter = 0;
             while (!isAWinner && !isADraw)
             {
                 
@@ -159,10 +169,33 @@ namespace TicTacToe
                     }
 
                     if(isAWinner == true)
+                    {
                         Console.WriteLine("Player X has won! Congratulations!");
+                        Console.WriteLine("Enter anything to restart the game or 'q' if you want to quit.");
+                        string input = Console.ReadLine();
+                        if (input == "q")
+                            Environment.Exit(0);
+                        else
+                        {
+                            ResetTheGame();
+                            goto START;
+                        }
+                        
+                    }
+                        
                     if(isADraw == true && isAWinner == false)
+                    {
                         Console.WriteLine("The game has finished with a draw.");
-
+                        Console.WriteLine("Enter anything to restart the game or 'q' if you want to quit.");
+                        string input = Console.ReadLine();
+                        if (input == "q")
+                            Environment.Exit(0);
+                        else
+                        {
+                            ResetTheGame();
+                            goto START;
+                        }
+                    }
                 }
                 else
                 {
@@ -196,9 +229,32 @@ namespace TicTacToe
                         goto AGAIN;
                     }
                     if (isAWinner == true)
+                    {
                         Console.WriteLine("Player O has won! Congratulations!");
+                        Console.WriteLine("Enter anything to restart the game or 'q' if you want to quit.");
+                        string input = Console.ReadLine();
+                        if (input == "q")
+                            Environment.Exit(0);
+                        else
+                        {
+                            ResetTheGame();
+                            goto START;
+                        }
+                    }
+                        
                     if (isADraw == true && isAWinner == false)
+                    {
                         Console.WriteLine("The game has finished with a draw.");
+                        Console.WriteLine("Enter anything to restart the game or 'q' if you want to quit.");
+                        string input = Console.ReadLine();
+                        if (input == "q")
+                            Environment.Exit(0);
+                        else
+                        {
+                            ResetTheGame();
+                            goto START;
+                        }
+                    }                        
                 }
 
                 counter++;
