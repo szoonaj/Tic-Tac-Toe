@@ -110,7 +110,7 @@ namespace TicTacToe
                         counter++;
                 }
             }
-            if (counter == 9)
+            if (counter == 9 && isAWinner == false)
                 isADraw = true;
         }
 
